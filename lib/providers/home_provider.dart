@@ -10,7 +10,7 @@ class HomeProvider extends ChangeNotifier {
   /// homeView دى ال body بتاعت ال screen
 
  void goToSourcesView(CategoryModel category){
-   homeView = SourcesView();
+   homeView = SourcesView(category: category,);
    title = category.title;
    notifyListeners();///بتخلي الواجهة تتحدث لما البيانات تتغير
 
