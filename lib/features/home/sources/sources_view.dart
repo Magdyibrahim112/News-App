@@ -4,19 +4,27 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/api/api_service.dart';
 import 'package:news_app/api/models/sources_response/Source.dart';
 import 'package:news_app/core/resources/colors_manager.dart';
-import 'package:news_app/features/home/sources/article_item.dart';
+//import 'package:news_app/features/home/sources/article_item.dart';
 import 'package:news_app/models/category_model.dart';
 
-class SourcesView extends StatelessWidget {
+import 'sources_view_model.dart';
+
+class SourcesView extends StatefulWidget {
   SourcesView({super.key, required this.category});
   final CategoryModel category;
 
+  @override
+  State<SourcesView> createState() => _SourcesViewState();
+}
+
+class _SourcesViewState extends State<SourcesView> {
+  late SourcesViewModel sourcesViewModel;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         FutureBuilder(
-          future: ApiService.getSources(category),
+          future: ApiService.getSources(widget.category),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
