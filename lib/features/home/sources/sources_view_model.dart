@@ -8,15 +8,25 @@ import 'package:provider/provider.dart';
 class SourcesViewModel extends ChangeNotifier{
   List<Source> sources = [];
   bool isLoading = false;
-  //String? errorMessage;
-  void loadSources(CategoryModel category)async{
+  String? errorMessage;
+  Future<void> loadSources(CategoryModel category)async{
     isLoading = true;// لانو هيجيب ال sources من ApiService(future == هتاخد وقت)
     notifyListeners();
-    SourcesResponse sourcesResponse =await ApiService.getSources(category);
-    isLoading = false;
-    notifyListeners();
-    sources = sourcesResponse.sources ?? [];
-    notifyListeners();
 
+    var result=await ApiService.getSources(category);
+
+    isLoading = false;//ما انت لو جبت ال result مش هتبقى isLoading
+    notifyListeners();
+    result.fold((message){
+      ///left
+     errorMessage = message;
+    },(sourcesList){
+      ///right/
+      sources = sourcesList;
+    });
+    notifyListeners();
+    // notifyListeners();
+    // sources = sourcesResponse.sources ?? [];
+    // notifyListeners();
   }
 }
