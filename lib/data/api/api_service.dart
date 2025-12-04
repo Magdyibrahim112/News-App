@@ -2,18 +2,19 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:news_app/api/models/articles_response/Article.dart';
-import 'package:news_app/api/models/articles_response/ArticlesResponse.dart';
-import 'package:news_app/api/models/sources_response/Source.dart';
-import 'package:news_app/api/models/sources_response/SourcesResponse.dart';
 import 'package:news_app/core/resources/constant_manager.dart';
+import 'package:news_app/data/api/models/articles_response/Article.dart';
+import 'package:news_app/data/api/models/articles_response/ArticlesResponse.dart';
+import 'package:news_app/data/api/models/sources_response/Source.dart';
 import 'package:news_app/models/category_model.dart';
 import 'package:http/http.dart' as http;
+
+import 'models/sources_response/SourcesResponse.dart';
 
 class ApiService {
   // left => failure return String
   // right => success return List<Source>
-  static Future<Either<String, List<Source>>> getSources(
+  Future<Either<String, List<Source>>> getSources(
     CategoryModel category,
   ) async {
     /// هتجيب ال source هتبقى passed على category معينة
@@ -47,7 +48,7 @@ class ApiService {
     }
   }
 
-  static Future<Either<String, List<Article>>> getArticles(
+  Future<Either<String, List<Article>>> getArticles(
     Source source, [
     String? searchKey,
   ]) async {

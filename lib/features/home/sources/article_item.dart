@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news_app/api/models/articles_response/Article.dart';
 import 'package:news_app/core/resources/colors_manager.dart';
+import 'package:news_app/data/api/models/articles_response/Article.dart';
 
 class ArticleItem extends StatelessWidget {
   const ArticleItem({super.key, required this.article});
